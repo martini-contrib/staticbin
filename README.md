@@ -27,6 +27,10 @@ func main() {
 }
 ```
 
+## Sample package using StaticBin
+
+* [yosssi/gold.yoss.si](https://github.com/yosssi/gold.yoss.si)
+
 ## Doc
 
 * [GoDoc](https://godoc.org/github.com/yosssi/staticbin)
