@@ -10,7 +10,8 @@ package main
 import "github.com/yosssi/staticbin"
 
 func main() {
-	// You have to pass the "Asset" function that go-bindata (https://github.com/jteeuwen/go-bindata) generated.
+	// You have to pass the "Asset" function that go-bindata
+	// (https://github.com/jteeuwen/go-bindata) generated.
 	// staticbin.Classic(Asset) instance automatically serves static files
 	// from the "public" directory in the root of your server.
 	// You can serve from more directories by adding more staticbin.Static handlers.
