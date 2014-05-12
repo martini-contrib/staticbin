@@ -29,6 +29,7 @@ func Static(dir string, Asset func(string) ([]byte, error), options ...Options) 
 		b, err := Asset(dir + path)
 
 		if err != nil {
+			// Exit if the asset could not be found.
 			return
 		}
 
