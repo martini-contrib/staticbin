@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"log"
 	"net/http"
+	"path"
 	"time"
 
 	"github.com/go-martini/martini"
@@ -24,19 +25,24 @@ func Static(dir string, Asset func(string) ([]byte, error), options ...Options) 
 			return
 		}
 
-		path := req.URL.Path
+		url := req.URL.Path
 
-		b, err := Asset(dir + path)
+		b, err := Asset(dir + url)
 
 		if err != nil {
-			// Exit if the asset could not be found.
-			return
+			// Try to serve the index file.
+			b, err = Asset(path.Join(dir+url, opt.IndexFile))
+
+			if err != nil {
+				// Exit if the asset could not be found.
+				return
+			}
 		}
 
 		if !opt.SkipLogging {
-			log.Println("[Static] Serving " + path)
+			log.Println("[Static] Serving " + url)
 		}
 
-		http.ServeContent(res, req, path, modtime, bytes.NewReader(b))
+		http.ServeContent(res, req, url, modtime, bytes.NewReader(b))
 	}
 }

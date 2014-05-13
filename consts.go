@@ -1,5 +1,6 @@
 package staticbin
 
 const (
-	defaultDir = "public"
+	defaultDir       = "public"
+	defaultIndexFile = "index.html"
 )
