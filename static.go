@@ -11,8 +11,8 @@ import (
 )
 
 // Static returns a middleware handler that serves static files in the given directory.
-func Static(dir string, Asset func(string) ([]byte, error), options ...Options) martini.Handler {
-	if Asset == nil {
+func Static(dir string, asset func(string) ([]byte, error), options ...Options) martini.Handler {
+	if asset == nil {
 		return func() {}
 	}
 
@@ -27,11 +27,11 @@ func Static(dir string, Asset func(string) ([]byte, error), options ...Options) 
 
 		url := req.URL.Path
 
-		b, err := Asset(dir + url)
+		b, err := asset(dir + url)
 
 		if err != nil {
 			// Try to serve the index file.
-			b, err = Asset(path.Join(dir+url, opt.IndexFile))
+			b, err = asset(path.Join(dir+url, opt.IndexFile))
 
 			if err != nil {
 				// Exit if the asset could not be found.
